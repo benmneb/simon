@@ -1,0 +1,11 @@
+
+make everything responsive
+  make button size responsive
+
+add modals? for Help and About
+
+for mobiles and tablets:
+  disable key-codes, change everything to touch
+
+
+? add high score

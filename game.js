@@ -39,14 +39,34 @@ function animatePress(currentColor) {
   setTimeout(function() {
     $('#' + currentColor).removeClass('pressed');
   }, 100)
-}
+};
 
-$(document).on('keydown', function() {
-  if (started === false) {
-    started = true;
-    nextSequence();
+$(document).on('keydown', (e) => {
+  switch (e.keyCode) {
+    case 32: // spacebar
+      if (started === false) {
+        started = true;
+        nextSequence();
+        togglePointers();
+      }
+      break;
+    case 72: // 'h' key
+      if (started === false) {
+        console.log('HELP!')
+      }
+      break;
+    case 65: // 'a' key
+      if (started === false) {
+        console.log('ABOUT')
+      }
+      break;
+    default: null
   }
-})
+});
+
+function togglePointers() {
+  $('div[type=button]').toggleClass('pointer');
+};
 
 function checkAnswer(currentLevel) {
   if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
@@ -61,11 +81,12 @@ function checkAnswer(currentLevel) {
     }
   } else {
     playSound('wrong');
+    togglePointers();
     $('body').addClass('game-over');
     setTimeout(() => {
       $('body').removeClass('game-over')
     }, 200)
-    $('h1').html('Game Over.<br>Press any key to Restart.')
+    $('h1').html('Game Over<br>Press Spacebar to Restart.')
     startOver();
   }
 }

@@ -1,24 +1,22 @@
 body {
+  font-family: 'Press Start 2P', cursive;
   text-align: center;
   background-color: #011F3F;
+  /* disable text highlighting */
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-  font-family: 'Press Start 2P', cursive;
+  /* disable scrolling */
+  overflow: hidden;
 }
 
 #level-title {
   font-size: 3rem;
   margin:  5%;
   color: #FEF2BF;
-}
-
-.controls {
-  font-size: 1rem;
-  color: #BFCBFF;
 }
 
 .container {
@@ -61,4 +59,16 @@ body {
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
+}
+
+/*  */
+
+.controls {
+  font-size: 1rem;
+  color: #BFCBFF;
+  margin: 3%
+}
+
+.pointer:hover {
+  cursor: pointer;
 }
