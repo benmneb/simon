@@ -9,7 +9,7 @@ let level = 1;
 let started = false;
 
 function nextSequence() {
-  let randomNumber = (Math.floor(Math.random() * 3) + 1);
+  let randomNumber = (Math.floor(Math.random() * 4));
   let randomChosenColor = buttonColors[randomNumber];
   $('#' + [randomChosenColor]).fadeOut(100).fadeIn(100);
   playSound(randomChosenColor);
@@ -18,7 +18,7 @@ function nextSequence() {
   $('h1').text('Level ' + level)
 }
 
-$('.btn').on('click', function() {
+$('.game-btn').on('click', function() {
   if (started === true) {
     let userChosenColor = this.id;
     userClickedPattern.push(userChosenColor);
@@ -53,11 +53,13 @@ $(document).on('keydown', (e) => {
     case 72: // 'h' key
       if (started === false) {
         console.log('HELP!')
+        $('#how-to-play').showModal();
       }
       break;
     case 65: // 'a' key
       if (started === false) {
-        console.log('ABOUT')
+        console.log('ABOUT');
+        // $('#dialog-rounded').css('display', 'inline');
       }
       break;
     default: null
@@ -86,7 +88,7 @@ function checkAnswer(currentLevel) {
     setTimeout(() => {
       $('body').removeClass('game-over')
     }, 200)
-    $('h1').html('Game Over<br>Press Spacebar to Restart.')
+    $('h1').html('Game Over.<br>Press Spacebar to Restart.')
     startOver();
   }
 }

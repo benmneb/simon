@@ -1,5 +1,5 @@
 body {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P', monospace;
   text-align: center;
   background-color: #011F3F;
   /* disable text highlighting */
@@ -10,7 +10,7 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
   /* disable scrolling */
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 #level-title {
@@ -23,17 +23,23 @@ body {
   display: block;
   width: 50%;
   margin: auto;
-
 }
 
-.btn {
+.game-btn {
+  margin: 25px;
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
+/* .btn {
   margin: 25px;
   display: inline-block;
   height: 200px;
   width: 200px;
   border: 10px solid black;
   border-radius: 20%;
-}
+} */
 
 .game-over {
   background-color: red;
@@ -41,19 +47,19 @@ body {
 }
 
 .red {
-  background-color: red;
+  background-color: #e76e55;
 }
 
 .green {
-  background-color: green;
+  background-color: #92cc41;
 }
 
 .blue {
-  background-color: blue;
+  background-color: #209cee;
 }
 
 .yellow {
-  background-color: yellow;
+  background-color: #f7d51d;
 }
 
 .pressed {
@@ -70,5 +76,13 @@ body {
 }
 
 .pointer:hover {
-  cursor: pointer;
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer
+}
+
+.modal-display {
+  display: none;
+}
+
+.padding-left-0 {
+  padding-left: 0px;
 }
