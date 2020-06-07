@@ -12,6 +12,8 @@ let started = false;
 
 let muteEverything = false;
 
+let highScore = 1;
+
 // GAME-PLAY
 
 function nextSequence() {
@@ -39,7 +41,8 @@ function checkAnswer(currentLevel) {
     if (userClickedPattern.length === gamePattern.length) {
       level++;
       setTimeout(() => {
-        $('h1').text('Level ' + level)
+        $('h1').text('Level ' + level);
+        calculateHighScore();
       }, 500)
       setTimeout(() => {
         nextSequence();
@@ -48,12 +51,12 @@ function checkAnswer(currentLevel) {
   } else {
     playSound('wrong');
     togglePointers();
+    $('h1').text('Game Over')
+    $('#subtitle').css('visibility', 'visible').text('Press Spacebar to Restart')
     $('body').addClass('game-over');
     setTimeout(() => {
       $('body').removeClass('game-over')
     }, 200)
-    $('h1').text('Game Over')
-    $('#subtitle').text('Press Spacebar to Restart')
     startOver();
   }
 }
@@ -88,6 +91,7 @@ $(document).on('keydown', (e) => {
       if (!started) {
         started = true;
         $('h1').text('Level ' + level)
+        calculateHighScore();
         setTimeout(() => {
           nextSequence();
           togglePointers();
@@ -114,6 +118,17 @@ function animatePress(currentColor) {
   }, 100)
 };
 
+// HIGH SCORE
+
+function calculateHighScore() {
+  if (highScore <= level) {
+    highScore = level;
+  } else {
+    highScore = highScore;
+  }
+  $('#subtitle').text(`Highscore: ${highScore}`);
+}
+
 // AESTHETICS
 
 function blinkText() {
@@ -125,7 +140,6 @@ function blinkText() {
   }
 };
 setInterval(blinkText, 1500);
-
 
 function togglePointers() {
   $('div[type=button]').toggleClass('pointer');

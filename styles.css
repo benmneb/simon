@@ -2,6 +2,7 @@ body {
   font-family: 'Press Start 2P', monospace;
   text-align: center;
   background-color: #011F3F;
+
   /* disable text highlighting */
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -24,6 +25,7 @@ body {
 
 .headings {
   margin:  5%;
+  margin-top: 2%;
 }
 
 .container {
