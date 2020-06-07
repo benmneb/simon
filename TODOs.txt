@@ -1,3 +1,4 @@
+make modals close on 'C' press
 
 make everything responsive
   make main-button size responsive?
@@ -7,10 +8,7 @@ get different colors for darkMode
 for mobiles and tablets:
   remove 'press key text'
 
-https://css-tricks.com/adding-stroke-to-web-text/
-
+fake loading bar
 https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_setinterval_progressbar
 
 ? add high score with mongo atlas
-
-make modals close on 'C' press

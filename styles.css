@@ -1,8 +1,27 @@
+:root {
+  /* background */
+  --light-bg-color: #F1F1F1;
+  --dark-bg-color: #333;
+  /* texts */
+  --light-maintitle: #333;
+  --dark-maintitle: #FEF2BF;
+  --light-subtitle: #333;
+  --dark-subtitle: #FEF2BF;
+  --light-controls: #333;
+  --dark-controls: #FEF2BF;
+  /* dialogs */
+  --light-border-img-src: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(33,37,41)" /></svg>');
+  --dark-border-img-src: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(255,255,255)" /></svg>');
+  /* checkbox  */
+  --light-checkbox: #333;
+  --dark-checkbox: #FEF2BF;
+}
+
 body {
   font-family: 'Press Start 2P', monospace;
   text-align: center;
-  background-color: #011F3F;
-
+  background-color: #F1F1F1;
+  /* background-color: #f1f1f1; */
   /* disable text highlighting */
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -14,12 +33,25 @@ body {
   /* overflow: hidden; */
 }
 
-#main-title {
-  font-size: 3rem;
-  color: #FEF2BF;
+.dark-body {
+  background-color: #212529;
 }
 
-#subtitle {
+h1 {
+  font-size: 3rem;
+  color: #000;
+}
+
+.dark-h1 {
+  color: #FEF2BF;
+  /* text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black; */
+}
+
+h2 {
+  color: #000;
+}
+
+.dark-h2 {
   color: #FEF2BF;
 }
 
@@ -34,11 +66,24 @@ body {
   margin: auto;
 }
 
+/* .game-btn.dark-container {
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(255,255,255)" /></svg>');
+} */
+
 .game-btn {
   margin: 25px;
   display: inline-block;
   height: 200px;
   width: 200px;
+}
+
+.controls {
+  font-size: 1rem;
+  margin: 3%
+}
+
+.dark-controls {
+  color: #FEF2BF;
 }
 
 .title {
@@ -85,7 +130,7 @@ body {
   background-color: #fefefe;
   margin: auto; /* horizonatally centered */
   padding: 20px;
-  border: 1px solid #888;
+  border-style: solid;
   /* vertically center */
   position: relative;
   top: 50%;
@@ -114,13 +159,16 @@ body {
   min-width: 470px;
 }
 
-/*  OTHER STYLING  */
+/*  DARK MODE  */
 
-.controls {
-  font-size: 1rem;
-  color: #BFCBFF;
-  margin: 3%
+.dark-dialog {
+  color: #fff;
+  background-color: #212529;
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(255,255,255)" /></svg>');
+  border-image-outset: 0;
 }
+
+/*  OTHER STYLING  */
 
 .pressed {
   box-shadow: 0 0 20px white;

@@ -51,12 +51,12 @@ function checkAnswer(currentLevel) {
   } else {
     playSound('wrong');
     togglePointers();
-    $('h1').text('Game Over')
-    $('#subtitle').css('visibility', 'visible').text('Press Spacebar to Restart')
+    $('h1').text('Game Over');
+    $('#subtitle').css('visibility', 'visible').text('Press Spacebar to Restart');
     $('body').addClass('game-over');
     setTimeout(() => {
-      $('body').removeClass('game-over')
-    }, 200)
+      $('body').removeClass('game-over');
+    }, 200);
     startOver();
   }
 }
@@ -66,6 +66,13 @@ function startOver() {
   gamePattern = [];
   started = false;
 }
+
+function animatePress(currentColor) {
+  $('#' + currentColor).addClass('pressed');
+  setTimeout(function() {
+    $('#' + currentColor).removeClass('pressed');
+  }, 100)
+};
 
 // SOUNDS
 
@@ -111,13 +118,6 @@ $(document).on('keydown', (e) => {
   }
 });
 
-function animatePress(currentColor) {
-  $('#' + currentColor).addClass('pressed');
-  setTimeout(function() {
-    $('#' + currentColor).removeClass('pressed');
-  }, 100)
-};
-
 // HIGH SCORE
 
 function calculateHighScore() {
@@ -126,10 +126,10 @@ function calculateHighScore() {
   } else {
     highScore = highScore;
   }
-  $('#subtitle').text(`Highscore: ${highScore}`);
+  $('#subtitle').text(`High score: ${highScore}`);
 }
 
-// AESTHETICS
+// MISC AESTHETICS
 
 function blinkText() {
   if (!started) {
@@ -182,3 +182,31 @@ $("#close-about").click(() => {
 //     about.style.display = "none";
 //   }
 // }
+
+// DARK-MODE
+
+let darkMode = false;
+
+function toggleDarkMode() {
+  $('body').toggleClass('dark-body');
+  $('h1').toggleClass('dark-h1');
+  $('.headings h2').toggleClass('dark-h2');
+  $('.controls').toggleClass('dark-controls');
+  // $('.game-btn').toggleClass('dark-container');
+  $('.modal-content').toggleClass('dark-dialog');
+  $('.nes-radio').toggleClass('is-dark');
+}
+
+$('#dark-mode-on').click(() => {
+  if (!darkMode) {
+    darkMode = true;
+    toggleDarkMode();
+  }
+})
+
+$('#dark-mode-off').click(() => {
+  if (darkMode) {
+    darkMode = false;
+    toggleDarkMode();
+  }
+})
