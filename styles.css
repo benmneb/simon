@@ -13,10 +13,17 @@ body {
   /* overflow: hidden; */
 }
 
-#level-title {
+#main-title {
   font-size: 3rem;
-  margin:  5%;
   color: #FEF2BF;
+}
+
+#subtitle {
+  color: #FEF2BF;
+}
+
+.headings {
+  margin:  5%;
 }
 
 .container {

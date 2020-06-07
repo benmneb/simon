@@ -25,7 +25,7 @@ function nextSequence() {
 }
 
 $('.game-btn').on('click', function() {
-  if (started === true) {
+  if (started) {
     let userChosenColor = this.id;
     userClickedPattern.push(userChosenColor);
     playSound(userChosenColor);
@@ -52,7 +52,8 @@ function checkAnswer(currentLevel) {
     setTimeout(() => {
       $('body').removeClass('game-over')
     }, 200)
-    $('h1').html('Game Over.<br>Press Spacebar to Restart.')
+    $('h1').text('Game Over')
+    $('#subtitle').text('Press Spacebar to Restart')
     startOver();
   }
 }
@@ -84,7 +85,7 @@ function playSound(name) {
 $(document).on('keydown', (e) => {
   switch (e.keyCode) {
     case 32: // spacebar
-      if (started === false) {
+      if (!started) {
         started = true;
         $('h1').text('Level ' + level)
         setTimeout(() => {
@@ -115,10 +116,20 @@ function animatePress(currentColor) {
 
 // AESTHETICS
 
+function blinkText() {
+  if (!started) {
+    $('#subtitle').css('visibility', 'hidden');
+    setTimeout(() => {
+      $('#subtitle').css('visibility', 'visible')
+    }, 200);
+  }
+};
+setInterval(blinkText, 1500);
+
+
 function togglePointers() {
   $('div[type=button]').toggleClass('pointer');
 };
-
 
 // MODALS/DIALOGS
 
