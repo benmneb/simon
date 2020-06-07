@@ -1,3 +1,5 @@
+// INITIAL VARIABLES
+
 let gamePattern = [];
 
 let userClickedPattern = [];
@@ -7,6 +9,10 @@ let buttonColors = ['red', 'blue', 'green', 'yellow'];
 let level = 1;
 
 let started = false;
+
+let muteEverything = false;
+
+// GAME-PLAY
 
 function nextSequence() {
   let randomNumber = (Math.floor(Math.random() * 4));
@@ -26,49 +32,7 @@ $('.game-btn').on('click', function() {
     animatePress(userChosenColor);
     checkAnswer(userClickedPattern.length - 1);
   }
-})
-
-
-function playSound(name) {
-  let sound = new Audio('sounds/' + name + '.mp3');
-  sound.play();
-}
-
-function animatePress(currentColor) {
-  $('#' + currentColor).addClass('pressed');
-  setTimeout(function() {
-    $('#' + currentColor).removeClass('pressed');
-  }, 100)
-};
-
-$(document).on('keydown', (e) => {
-  switch (e.keyCode) {
-    case 32: // spacebar
-      if (started === false) {
-        started = true;
-        nextSequence();
-        togglePointers();
-      }
-      break;
-    case 72: // 'h' key
-      if (started === false) {
-        console.log('HELP!')
-        $('#how-to-play').showModal();
-      }
-      break;
-    case 65: // 'a' key
-      if (started === false) {
-        console.log('ABOUT');
-        // $('#dialog-rounded').css('display', 'inline');
-      }
-      break;
-    default: null
-  }
 });
-
-function togglePointers() {
-  $('div[type=button]').toggleClass('pointer');
-};
 
 function checkAnswer(currentLevel) {
   if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
@@ -98,3 +62,98 @@ function startOver() {
   gamePattern = [];
   started = false;
 }
+
+// SOUNDS
+
+$('#sound-on').click(() => {
+  muteEverything = false;
+});
+$('#sound-off').click(() => {
+  muteEverything = true;
+});
+
+function playSound(name) {
+  if (!muteEverything) {
+    let sound = new Audio('sounds/' + name + '.mp3');
+    sound.play();
+  }
+};
+
+// KEY-PRESSES
+
+$(document).on('keydown', (e) => {
+  switch (e.keyCode) {
+    case 32: // spacebar
+      if (started === false) {
+        started = true;
+        $('h1').text('Level ' + level)
+        setTimeout(() => {
+          nextSequence();
+          togglePointers();
+        }, 500)
+      }
+      break;
+    case 72: // 'h' key
+      $('#how-to-play').toggle();
+      break;
+    case 65: // 'a' key
+      $('#about').toggle();
+      break;
+    case 79: // 'o' key
+      $('#options').toggle();
+      break;
+    default: null
+  }
+});
+
+function animatePress(currentColor) {
+  $('#' + currentColor).addClass('pressed');
+  setTimeout(function() {
+    $('#' + currentColor).removeClass('pressed');
+  }, 100)
+};
+
+// AESTHETICS
+
+function togglePointers() {
+  $('div[type=button]').toggleClass('pointer');
+};
+
+
+// MODALS/DIALOGS
+
+// open
+$("#open-how-to-play").click(() => {
+  $("#how-to-play").show()
+});
+$("#open-about").click(() => {
+  $("#about").show()
+});
+$("#open-options").click(() => {
+  $("#options").show()
+});
+
+// close
+$("#close-how-to-play").click(() => {
+  $("#how-to-play").hide();
+});
+$("#close-options").click(() => {
+  $("#options").hide();
+});
+$("#close-about").click(() => {
+  $("#about").hide();
+});
+
+// const howToPlay = $("#how-to-play")[0];
+// const options = $("#options")[0];
+// const about = $("#about")[0];
+
+// window.onclick = (e) => {
+//   if (event.target == howToPlay) {
+//     howToPlay.style.display = "none";
+//   } else if (event.target == options) {
+//     options.style.display = "none";
+//   } else if (event.target == about) {
+//     about.style.display = "none";
+//   }
+// }

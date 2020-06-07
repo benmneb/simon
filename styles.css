@@ -32,14 +32,9 @@ body {
   width: 200px;
 }
 
-/* .btn {
-  margin: 25px;
-  display: inline-block;
-  height: 200px;
-  width: 200px;
-  border: 10px solid black;
-  border-radius: 20%;
-} */
+.title {
+  font-weight: bold;
+}
 
 .game-over {
   background-color: red;
@@ -62,12 +57,55 @@ body {
   background-color: #f7d51d;
 }
 
-.pressed {
-  box-shadow: 0 0 20px white;
-  background-color: grey;
+/*  MODALS/DIALOGS  */
+
+.modal-bg {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.3); /* Black w/ opacity */
 }
 
-/*  */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto; /* horizonatally centered */
+  padding: 20px;
+  border: 1px solid #888;
+  /* vertically center */
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  /* rounded nes border */
+  border-width: 4px;
+  border-image-slice: 3;
+  border-image-width: 3;
+  border-image-repeat: stretch;
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(33,37,41)" /></svg>');
+  border-image-outset: 2;
+}
+
+.how-to-play {
+  width: 70%;
+  min-width: 470px;
+}
+
+.options {
+  width: 30%;
+  min-width: 470px;
+}
+
+.about {
+  width: 45%;
+  min-width: 470px;
+}
+
+/*  OTHER STYLING  */
 
 .controls {
   font-size: 1rem;
@@ -75,14 +113,28 @@ body {
   margin: 3%
 }
 
+.pressed {
+  box-shadow: 0 0 20px white;
+  background-color: grey;
+}
+
 .pointer:hover {
   cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer
 }
 
-.modal-display {
-  display: none;
-}
-
 .padding-left-0 {
   padding-left: 0px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.align-self-center {
+  align-self: center;
 }

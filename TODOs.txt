@@ -1,11 +1,14 @@
 
 make everything responsive
-  make button size responsive
+  make main-button size responsive?
 
-add modals? for Help and About
+get different colors for darkMode
 
 for mobiles and tablets:
-  disable key-codes, change everything to touch
+  remove 'press key text'
 
+https://css-tricks.com/adding-stroke-to-web-text/
 
-? add high score
+? add high score with mongo atlas
+
+make modals close on 'C' press

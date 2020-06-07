@@ -12,6 +12,7 @@
 <body>
 
   <h1 id="level-title">Press Spacebar to Start</h1>
+  
 
   <div class="container">
 
@@ -48,89 +49,99 @@
   <section>
     <h2 class='controls'>
       Press 'H' for
-      <button type="button" class="nes-btn" onclick="document.getElementById('how-to-play').showModal();">
+      <button type="button" id='open-how-to-play' class="nes-btn">
         How to Play
       </button>
       'O' for
-      <button type="button" class="nes-btn" onclick="document.getElementById('options').showModal();">
+      <button type="button" id='open-options' class="nes-btn">
         Options
       </button>
       'A' for
-      <button type="button" class="nes-btn" onclick="document.getElementById('about').showModal();">
+      <button type="button" id='open-about' class="nes-btn">
         About
       </button>
     </h2>
   </section>
 
   <section>
-    <dialog class="nes-dialog is-rounded" id="how-to-play">
-      <form method="dialog">
-        <p class="title">How to Play Simon</p>
+    <div id="how-to-play" class="modal-bg">
+      <div class="modal-content how-to-play">
+        <p class="title">How to Play</p>
         <p>Simon randomly flashes a color one at a time. Your job is to remember the order and click on them to prove it.</p>
         <p>There are infinite levels. The game ends when your memory fails.</p>
         <menu class="dialog-menu padding-left-0">
-          <!-- <button class="nes-btn">Close</button> -->
-          <button class="nes-btn is-primary">Confirm</button>
+          <button id='close-how-to-play' class="nes-btn is-primary">Confirm</button>
         </menu>
-      </form>
-    </dialog>
+      </div>
+    </div>
   </section>
 
   <section>
-    <dialog class="nes-dialog is-rounded" id="options">
-      <form method="dialog">
+    <div id="options" class="modal-bg">
+      <div class="modal-content options">
         <p class="title">Options</p>
-        <p>
-          <span>Sound:</span>
-          <label>
-            <input type="radio" class="nes-radio" name="answer" checked />
-            <span>On</span>
-          </label>
-          <label>
-            <input type="radio" class="nes-radio" name="answer" />
-            <span>Off</span>
-          </label>
-        </p>
-        <p>
-          <span>Dark Mode:</span>
-          <label>
-            <input type="radio" class="nes-radio" name="answer" checked />
-            <span>On</span>
-          </label>
-          <label>
-            <input type="radio" class="nes-radio" name="answer" />
-            <span>Off</span>
-          </label>
-        </p>
+        <div class='flex-center'>
+          <table class='align-self-center text-left'>
+            <tbody>
+              <tr>
+                <td>
+                  <span>Sounds:</span>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" id='sound-on' class="nes-radio" name="sound" checked />
+                    <span>On</span>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" id='sound-off' class="nes-radio" name="sound" />
+                    <span>Off</span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>Dark Mode:</span>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" id='dark-mode-on' class="nes-radio" name="dark-mode" />
+                    <span>On</span>
+                  </label>
+                </td>
+                <td class='text-left'>
+                  <label>
+                    <input type="radio" id='dark-mode-off' class="nes-radio" name="dark-mode" checked />
+                    <span>Off</span>
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <menu class="dialog-menu padding-left-0">
-          <button class="nes-btn">Cancel</button>
-          <button class="nes-btn is-primary">Confirm</button>
+          <button id='close-options' class="nes-btn is-primary">Confirm</button>
         </menu>
-      </form>
-    </dialog>
+      </div>
+    </div>
   </section>
 
   <section>
-    <dialog class="nes-dialog is-rounded" id="about">
-      <form method="dialog">
+    <div id="about" class="modal-bg">
+      <div class="modal-content about">
         <p class="title">About</p>
-        <p>
-          Made as an extension to a <a href="">TAB project</a>
-        </p>
-        <p>
-          8 bit graphics by <a href="">NES.css</a>
-        </p>
-        <a href=""><i class="nes-icon github is-large"></i>
-          <p>
-            benmneb
-          </p>
+        <p>Made as an extension to a <a href='https://www.appbrewery.co/' target='_blank'>TAB project</a></p>
+        <p>8-bit graphics by <a href='https://github.com/nostalgic-css/NES.css' target='_blank'>NES.css</a></p>
+        <a href='https://github.com/benmneb' target='_blank'><i class="nes-icon github is-large"></i>
+          <p>benmneb</p>
         </a>
         <menu class="dialog-menu padding-left-0">
-          <button class="nes-btn">Close</button>
-          <button class="nes-btn is-primary">View on GitHub</button>
+          <button id='close-about' class="nes-btn">Close</button>
+          <a class="nes-btn is-primary" href='https://github.com/benmneb' target='_blank'>View on GitHub</a>
         </menu>
-      </form>
-    </dialog>
+      </div>
+    </div>
   </section>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
