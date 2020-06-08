@@ -336,21 +336,42 @@ function deviceWidth() {
     $('#subtitle').text('Tap Anywhere to Start');
     $('.keyboards-only').hide();
     $('.hotkey').addClass('hotkey-gone');
+    addTouchToStart();
   } else {
     $('#subtitle').text('Press Spacebar to Start');
     $('.keyboards-only').show();
     $('.hotkey').removeClass('hotkey-gone');
   };
 };
-
 deviceWidth(smlDevice);
 
-// start game on click anywhere but the buttons and dialogs
-if (smlDevice.matches) {
+// start game on click anywhere except the buttons and their dialogs
+function addTouchToStart() {
   $(document).click(function(event) {
-    $target = $(event.target);
-    if(!$target.closest('.dont-start').length) {
+    const target = $(event.target);
+    if (!target.closest('.dont-start').length && !started) {
       startGame();
-    };
+    }
   });
 };
+
+// 'LOADING' BAR
+
+function load() {
+  var progress = 0;
+  var speed = setInterval(frame, (Math.random() * 50));
+
+  function frame() {
+    if (progress >= 100) {
+      clearInterval(speed);
+      setTimeout(() => {
+        $('.loading-bg').fadeOut(50);
+      }, 200)
+    } else {
+      progress += (Math.random() * 5);
+      $('.nes-progress').attr('value', progress);
+    }
+  };
+};
+
+$(document).ready(load());

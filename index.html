@@ -16,6 +16,13 @@
     <h2 id='subtitle'>Press Spacebar to Start</h2>
   </header>
 
+  <div class='loading-bg'>
+    <div class='loading-container'>
+      <p class="title">Loading...</p>
+      <progress class="nes-progress is-primary" value="0" max="100"></progress>
+    </div>
+  </div>
+
   <section class="btns-container">
     <div class="row">
       <div type='button' id='green' class="nes-container is-rounded game-btn green"> </div>
@@ -120,7 +127,7 @@
       </a>
       <menu class="dialog-menu padding-left-0">
         <button id='close-about' class="nes-btn hotkey">Close</button>
-        <a class="nes-btn is-primary" href='https://github.com/benmneb' target='_blank'>View on <span class='hotkey'>GitHub</span></a>
+        <a class="nes-btn is-primary hotkey" href='https://github.com/benmneb' target='_blank'>View on GitHub</a>
       </menu>
     </article>
   </section>

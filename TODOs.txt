@@ -1,11 +1,12 @@
 
-sort out double touch/click issue on smlDevice
-  https://stackoverflow.com/a/36452427/12104850
 
+check layout on really small phones
 
-::first-letter of everything with a keycode
-
-fake loading bar
-https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_setinterval_progressbar
+add userPrefers darkMode inc. loader
 
 ? add global high score with mongo atlas
+
+(
+sorted out double touch/click issue on smlDevice!
+  https://stackoverflow.com/a/36452427/12104850
+)

@@ -63,6 +63,29 @@ h2 {
   width: 200px;
 }
 
+/*  'LOADING' SCREEN  */
+
+.loading-bg {
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  background-color: #F1F1F1;
+}
+
+.loading-container {
+  margin: 0 auto;
+  width: 50%;
+  min-width: 470px;
+  /* vertically center */
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .controls {
   font-size: 1rem;
   margin: 3%;
@@ -97,7 +120,7 @@ h2 {
   background-color: #f7d51d;
 }
 
-/*  MODALS/DIALOGS  */
+/*  DIALOGS  */
 
 .modal-bg {
   display: none; /* Hidden by default */
