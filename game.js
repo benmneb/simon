@@ -12,9 +12,13 @@ let started = false;
 
 let muteEverything = false;
 
-let highScore = 1;
+let highScore = 0;
 
 let darkMode = false;
+
+let isHowToPlayOpen = false;
+let isAboutOpen = false;
+let isOptionsOpen = false;
 
 // GAME-PLAY
 
@@ -28,14 +32,15 @@ function nextSequence() {
   $('h1').text('Level ' + level)
 }
 
-$('.game-btn').on('click', function() {
+$('.game-btn').on('click touchstart', function() {
   if (started) {
     let userChosenColor = this.id;
     userClickedPattern.push(userChosenColor);
     playSound(userChosenColor);
     animatePress(userChosenColor);
     checkAnswer(userClickedPattern.length - 1);
-  }
+    return false;
+  };
 });
 
 function checkAnswer(currentLevel) {
@@ -54,7 +59,11 @@ function checkAnswer(currentLevel) {
     playSound('wrong');
     togglePointers();
     $('h1').text('Game Over');
-    $('#subtitle').css('visibility', 'visible').text('Press Spacebar to Restart');
+    if (smlDevice.matches) {
+      $('#subtitle').text('Tap Anywhere to Restart');
+    } else {
+      $('#subtitle').text('Press Spacebar to Restart');
+    };
     $('body').addClass('game-over');
     setTimeout(() => {
       $('body').removeClass('game-over');
@@ -106,17 +115,21 @@ function toggleMuteEverythingRadio() {
 
 // KEY-PRESSES
 
+function startGame() {
+  started = true;
+  $('h1').text('Level ' + level)
+  calculateHighScore();
+  setTimeout(() => {
+    nextSequence();
+    togglePointers();
+  }, 500);
+}
+
 $(document).on('keydown', (e) => {
   switch (e.keyCode) {
     case 32: // spacebar
       if (!started && !isOptionsOpen && !isAboutOpen && !isHowToPlayOpen) {
-        started = true;
-        $('h1').text('Level ' + level)
-        calculateHighScore();
-        setTimeout(() => {
-          nextSequence();
-          togglePointers();
-        }, 500)
+        startGame();
       };
       break;
     case 72: // 'h'
@@ -171,53 +184,46 @@ $(document).on('keydown', (e) => {
     case 67: // 'c'
     case 13: // enter
     case 27: // escape
-        if (isHowToPlayOpen || isAboutOpen || isOptionsOpen) {
-          $('#how-to-play').hide();
-          isHowToPlayOpen = false;
-          $('#options').hide();
-          isAboutOpen = false;
-          $('#about').hide();
-          isOptionsOpen = false;
-        };
-        break;
-      case 71: // 'g'
-      case 86: // 'v'
-        if (isAboutOpen) {
-          window.open('https://github.com/benmneb', '_blank')
-        }
-        break;
-      case 84: // 't'
-        if (isAboutOpen) {
-          window.open('https://www.appbrewery.co/', '_blank')
-        }
-        break;
-      case 78: // 'n'
-        if (isAboutOpen) {
-          window.open('https://github.com/nostalgic-css/NES.css', '_blank')
-        }
-        break;
-    default: null
+      if (isHowToPlayOpen || isAboutOpen || isOptionsOpen) {
+        $('#how-to-play').hide();
+        isHowToPlayOpen = false;
+        $('#options').hide();
+        isAboutOpen = false;
+        $('#about').hide();
+        isOptionsOpen = false;
+      };
+      break;
+    case 71: // 'g'
+    case 86: // 'v'
+      if (isAboutOpen) {
+        window.open('https://github.com/benmneb', '_blank')
+      }
+      break;
+    case 84: // 't'
+      if (isAboutOpen) {
+        window.open('https://www.appbrewery.co/', '_blank')
+      }
+      break;
+    case 78: // 'n'
+      if (isAboutOpen) {
+        window.open('https://github.com/nostalgic-css/NES.css', '_blank')
+      }
+      break;
+    default:
+      null
   }
 });
-
-function showSoundsNotification() {
-  if (muteEverything) {
-    $('#sound-notification-text').text('Sounds off.')
-  } else if (!muteEverything) {
-    $('#sound-notification-text').text('Sounds on.')
-  };
-  $('#sound-notification').show().delay(2000).slideUp();
-};
 
 // HIGH SCORE
 
 function calculateHighScore() {
   if (highScore <= level) {
     highScore = level;
+    $('#subtitle').html(`High score: ${highScore}`);
   } else {
     highScore = highScore;
+    $('#subtitle').text(`High score: ${highScore}`);
   }
-  $('#subtitle').text(`High score: ${highScore}`);
 }
 
 // MISC AESTHETICS
@@ -236,11 +242,16 @@ function togglePointers() {
   $('div[type=button]').toggleClass('pointer');
 };
 
-// DIALOGS
+function showSoundsNotification() {
+  if (muteEverything) {
+    $('#sound-notification-text').text('Sounds off.')
+  } else if (!muteEverything) {
+    $('#sound-notification-text').text('Sounds on.')
+  };
+  $('#sound-notification').show().delay(2000).slideUp();
+};
 
-let isHowToPlayOpen = false;
-let isAboutOpen = false;
-let isOptionsOpen = false;
+// DIALOGS
 
 // open
 $("#open-how-to-play").click(() => {
@@ -301,19 +312,45 @@ function toggleDarkMode() {
 $('#dark-mode-on').click(() => {
   if (!darkMode) {
     toggleDarkMode();
-    console.log('dMoff', $('#dark-mode-off').prop('checked'));
-    console.log('dMon', $('#dark-mode-on').prop('checked'));
   }
 })
 
 $('#dark-mode-off').click(() => {
   if (darkMode) {
     toggleDarkMode();
-    console.log('dMoff', $('#dark-mode-off').prop('checked'));
-    console.log('dMon', $('#dark-mode-on').prop('checked'));
   }
 })
 
 function toggleDarkModeRadio() {
   $('input[name="dark-mode"]').not(':checked').prop("checked", true);
 }
+
+// MEDIA-QUERIES
+
+const smlDevice = window.matchMedia('(max-width: 800px)');
+
+smlDevice.addListener(deviceWidth);
+
+function deviceWidth() {
+  if (smlDevice.matches) {
+    $('#subtitle').text('Tap Anywhere to Start');
+    $('.keyboards-only').hide();
+    $('.hotkey').addClass('hotkey-gone');
+  } else {
+    $('#subtitle').text('Press Spacebar to Start');
+    $('.keyboards-only').show();
+    $('.hotkey').removeClass('hotkey-gone');
+  };
+};
+
+deviceWidth(smlDevice);
+
+// start game on click anywhere but the buttons and dialogs
+if (smlDevice.matches) {
+  $(document).click(function(event) {
+    $target = $(event.target);
+    if(!$target.closest('.dont-start').length) {
+      startGame();
+    };
+  });
+};

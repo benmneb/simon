@@ -1,16 +1,9 @@
-make modals close on 'C' press and enter and esc
 
-add "sounds off" popup
+sort out double touch/click issue on smlDevice
+  https://stackoverflow.com/a/36452427/12104850
 
-add nes icons
 
-? add user prefers darkmode
-
-make everything responsive
-  make main-button size responsive?
-
-for mobiles and tablets:
-  remove 'press key text'
+::first-letter of everything with a keycode
 
 fake loading bar
 https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_setinterval_progressbar
