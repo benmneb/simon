@@ -14,6 +14,8 @@ let muteEverything = false;
 
 let highScore = 1;
 
+let darkMode = false;
+
 // GAME-PLAY
 
 function nextSequence() {
@@ -90,6 +92,18 @@ function playSound(name) {
   }
 };
 
+function toggleMuteEverything() {
+  if (muteEverything) {
+    muteEverything = false;
+  } else {
+    muteEverything = true;
+  }
+}
+
+function toggleMuteEverythingRadio() {
+  $('input[name="sound"]').not(':checked').prop("checked", true);
+}
+
 // KEY-PRESSES
 
 $(document).on('keydown', (e) => {
@@ -106,13 +120,49 @@ $(document).on('keydown', (e) => {
       }
       break;
     case 72: // 'h' key
-      $('#how-to-play').toggle();
+      if (!isOptionsOpen && !isAboutOpen) {
+        if (!isHowToPlayOpen) {
+          $('#how-to-play').show();
+          isHowToPlayOpen = true;
+        } else {
+          $('#how-to-play').hide();
+          isHowToPlayOpen = false;
+        };
+      };
       break;
     case 65: // 'a' key
-      $('#about').toggle();
+      if (!isHowToPlayOpen && !isOptionsOpen) {
+        if (!isAboutOpen) {
+          $('#about').show();
+          isAboutOpen = true;
+        } else {
+          $('#about').hide();
+          isAboutOpen = false;
+        };
+      };
       break;
     case 79: // 'o' key
-      $('#options').toggle();
+      if (!isHowToPlayOpen && !isAboutOpen) {
+        if (!isOptionsOpen) {
+          $('#options').show();
+          isOptionsOpen = true;
+        } else {
+          $('#options').hide();
+          isOptionsOpen = false;
+        };
+      };
+      break;
+    case 68: // 'd' key
+      if (!isHowToPlayOpen && !isAboutOpen) {
+        toggleDarkMode();
+        toggleDarkModeRadio();
+      };
+      break;
+    case 83: // 's'
+      if (!isHowToPlayOpen && !isAboutOpen) {
+        toggleMuteEverything();
+        toggleMuteEverythingRadio();
+      };
       break;
     default: null
   }
@@ -145,28 +195,38 @@ function togglePointers() {
   $('div[type=button]').toggleClass('pointer');
 };
 
-// MODALS/DIALOGS
+// DIALOGS
+
+let isHowToPlayOpen = false;
+let isAboutOpen = false;
+let isOptionsOpen = false;
 
 // open
 $("#open-how-to-play").click(() => {
-  $("#how-to-play").show()
+  $("#how-to-play").show();
+  isHowToPlayOpen = true;
 });
 $("#open-about").click(() => {
-  $("#about").show()
+  $("#about").show();
+  isAboutOpen = true;
 });
 $("#open-options").click(() => {
-  $("#options").show()
+  $("#options").show();
+  isOptionsOpen = true;
 });
 
 // close
 $("#close-how-to-play").click(() => {
   $("#how-to-play").hide();
+  isHowToPlayOpen = false;
 });
 $("#close-options").click(() => {
   $("#options").hide();
+  isOptionsOpen = false;
 });
 $("#close-about").click(() => {
   $("#about").hide();
+  isAboutOpen = false;
 });
 
 // const howToPlay = $("#how-to-play")[0];
@@ -185,9 +245,8 @@ $("#close-about").click(() => {
 
 // DARK-MODE
 
-let darkMode = false;
-
 function toggleDarkMode() {
+  darkMode ? darkMode = false : darkMode = true;
   $('body').toggleClass('dark-body');
   $('h1').toggleClass('dark-h1');
   $('.headings h2').toggleClass('dark-h2');
@@ -199,14 +258,20 @@ function toggleDarkMode() {
 
 $('#dark-mode-on').click(() => {
   if (!darkMode) {
-    darkMode = true;
     toggleDarkMode();
+    console.log('dMoff', $('#dark-mode-off').prop('checked'));
+    console.log('dMon', $('#dark-mode-on').prop('checked'));
   }
 })
 
 $('#dark-mode-off').click(() => {
   if (darkMode) {
-    darkMode = false;
     toggleDarkMode();
+    console.log('dMoff', $('#dark-mode-off').prop('checked'));
+    console.log('dMon', $('#dark-mode-on').prop('checked'));
   }
 })
+
+function toggleDarkModeRadio() {
+  $('input[name="dark-mode"]').not(':checked').prop("checked", true);
+}

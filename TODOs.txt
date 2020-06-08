@@ -1,9 +1,13 @@
-make modals close on 'C' press
+make modals close on 'C' press and enter and esc
+
+add "sounds off" popup
+
+add nes icons
+
+? add user prefers darkmode
 
 make everything responsive
   make main-button size responsive?
-
-get different colors for darkMode
 
 for mobiles and tablets:
   remove 'press key text'
@@ -11,4 +15,4 @@ for mobiles and tablets:
 fake loading bar
 https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_setinterval_progressbar
 
-? add high score with mongo atlas
+? add global high score with mongo atlas
