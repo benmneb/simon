@@ -109,7 +109,7 @@ function toggleMuteEverythingRadio() {
 $(document).on('keydown', (e) => {
   switch (e.keyCode) {
     case 32: // spacebar
-      if (!started) {
+      if (!started && !isOptionsOpen && !isAboutOpen && !isHowToPlayOpen) {
         started = true;
         $('h1').text('Level ' + level)
         calculateHighScore();
@@ -117,9 +117,9 @@ $(document).on('keydown', (e) => {
           nextSequence();
           togglePointers();
         }, 500)
-      }
+      }; 
       break;
-    case 72: // 'h' key
+    case 72: // 'h'
       if (!isOptionsOpen && !isAboutOpen) {
         if (!isHowToPlayOpen) {
           $('#how-to-play').show();
@@ -130,7 +130,7 @@ $(document).on('keydown', (e) => {
         };
       };
       break;
-    case 65: // 'a' key
+    case 65: // 'a'
       if (!isHowToPlayOpen && !isOptionsOpen) {
         if (!isAboutOpen) {
           $('#about').show();
@@ -141,7 +141,7 @@ $(document).on('keydown', (e) => {
         };
       };
       break;
-    case 79: // 'o' key
+    case 79: // 'o'
       if (!isHowToPlayOpen && !isAboutOpen) {
         if (!isOptionsOpen) {
           $('#options').show();
@@ -152,7 +152,7 @@ $(document).on('keydown', (e) => {
         };
       };
       break;
-    case 68: // 'd' key
+    case 68: // 'd'
       if (!isHowToPlayOpen && !isAboutOpen) {
         toggleDarkMode();
         toggleDarkModeRadio();
@@ -164,6 +164,34 @@ $(document).on('keydown', (e) => {
         toggleMuteEverythingRadio();
       };
       break;
+    case 67: // 'c'
+    case 13: // enter
+    case 27: // escape
+        if (isHowToPlayOpen || isAboutOpen || isOptionsOpen) {
+          $('#how-to-play').hide();
+          isHowToPlayOpen = false;
+          $('#options').hide();
+          isAboutOpen = false;
+          $('#about').hide();
+          isOptionsOpen = false;
+        };
+        break;
+      case 71: // 'g'
+      case 86: // 'v'
+        if (isAboutOpen) {
+          window.open('https://github.com/benmneb', '_blank')
+        }
+        break;
+      case 84: // 't'
+        if (isAboutOpen) {
+          window.open('https://www.appbrewery.co/', '_blank')
+        }
+        break;
+      case 78: // 'n'
+        if (isAboutOpen) {
+          window.open('https://github.com/nostalgic-css/NES.css', '_blank')
+        }
+        break;
     default: null
   }
 });
