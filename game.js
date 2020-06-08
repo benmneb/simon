@@ -117,7 +117,7 @@ $(document).on('keydown', (e) => {
           nextSequence();
           togglePointers();
         }, 500)
-      }; 
+      };
       break;
     case 72: // 'h'
       if (!isOptionsOpen && !isAboutOpen) {
@@ -159,7 +159,11 @@ $(document).on('keydown', (e) => {
       };
       break;
     case 83: // 's'
-      if (!isHowToPlayOpen && !isAboutOpen) {
+      if (!isHowToPlayOpen && !isAboutOpen && !isOptionsOpen) {
+        toggleMuteEverything();
+        toggleMuteEverythingRadio();
+        showSoundsNotification();
+      } else if (isOptionsOpen) {
         toggleMuteEverything();
         toggleMuteEverythingRadio();
       };
@@ -195,6 +199,15 @@ $(document).on('keydown', (e) => {
     default: null
   }
 });
+
+function showSoundsNotification() {
+  if (muteEverything) {
+    $('#sound-notification-text').text('Sounds off.')
+  } else if (!muteEverything) {
+    $('#sound-notification-text').text('Sounds on.')
+  };
+  $('#sound-notification').show().delay(2000).slideUp();
+};
 
 // HIGH SCORE
 
@@ -282,6 +295,7 @@ function toggleDarkMode() {
   // $('.game-btn').toggleClass('dark-container');
   $('.modal-content').toggleClass('dark-dialog');
   $('.nes-radio').toggleClass('is-dark');
+  $('.nes-balloon').toggleClass('is-dark');
 }
 
 $('#dark-mode-on').click(() => {

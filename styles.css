@@ -17,7 +17,7 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
   /* disable scrolling */
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .dark-body {
@@ -170,6 +170,10 @@ h2 {
   padding-left: 0px;
 }
 
+.padding-btm-0 {
+  padding-bottom: 0px;
+}
+
 .text-left {
   text-align: left;
 }
@@ -181,4 +185,18 @@ h2 {
 
 .align-self-center {
   align-self: center;
+}
+
+.pop-over {
+  display: none;
+  position: absolute;
+  float: left;
+  padding: 20px;
+  bottom: -50px;
+  z-index: 1;
+}
+
+.pop-over-msg {
+  margin-left: 20px;
+  top: -50px;
 }
