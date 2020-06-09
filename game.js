@@ -327,10 +327,6 @@ function toggleDarkModeRadio() {
 
 // MEDIA-QUERIES
 
-const smlDevice = window.matchMedia('(max-width: 800px)');
-
-smlDevice.addListener(deviceWidth);
-
 function deviceWidth() {
   if (smlDevice.matches) {
     $('#subtitle').text('Tap Anywhere to Start');
@@ -338,18 +334,22 @@ function deviceWidth() {
     $('.hotkey').addClass('hotkey-gone');
     addTouchToStart();
   } else {
-    $('#subtitle').text('Press Spacebar to Start');
+    if (!started) {
+      $('#subtitle').text('Press Spacebar to Start');
+    };
     $('.keyboards-only').show();
     $('.hotkey').removeClass('hotkey-gone');
   };
 };
+const smlDevice = window.matchMedia('(max-width: 800px)');
+smlDevice.addListener(deviceWidth);
 deviceWidth(smlDevice);
 
 // start game on click anywhere except the buttons and their dialogs
 function addTouchToStart() {
   $(document).click(function(event) {
     const target = $(event.target);
-    if (!target.closest('.dont-start').length && !started) {
+    if (!target.closest('.dont-start').length && !started && smlDevice.matches) {
       startGame();
     }
   });
