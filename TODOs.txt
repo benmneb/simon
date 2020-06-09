@@ -1,10 +1,11 @@
 
 
-check layout on really small phones
+check layout on really small phones in firefox
 
 add userPrefers darkMode inc. loader
 
 ? add global high score with mongo atlas
+
 
 (
 sorted out double touch/click issue on smlDevice!

@@ -8,6 +8,7 @@ body {
   font-family: 'Press Start 2P', monospace;
   text-align: center;
   background-color: #F1F1F1;
+  overflow: hidden;
   /* disable text highlighting */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -15,8 +16,6 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  /* disable scrolling */
-  overflow: hidden;
 }
 
 .dark-body {
@@ -66,13 +65,13 @@ h2 {
 /*  'LOADING' SCREEN  */
 
 .loading-bg {
-  position: fixed; /* Stay in place */
-  z-index: 2; /* Sit on top */
+  position: fixed;
+  z-index: 2;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: hidden; /* Enable scroll if needed */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   background-color: #F1F1F1;
 }
 
@@ -85,6 +84,8 @@ h2 {
   top: 50%;
   transform: translateY(-50%);
 }
+
+/*  */
 
 .controls {
   font-size: 1rem;
