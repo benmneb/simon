@@ -304,7 +304,7 @@ function toggleDarkMode() {
   $('.headings h2').toggleClass('dark-h2');
   $('.controls').toggleClass('dark-controls');
   // $('.game-btn').toggleClass('dark-container');
-  $('.modal-content').toggleClass('dark-dialog');
+  $('.dialog-content').toggleClass('dark-dialog');
   $('.nes-radio').toggleClass('is-dark');
   $('.nes-balloon').toggleClass('is-dark');
   $('.loading-bg').toggleClass('dark-loading-bg');
