@@ -307,6 +307,8 @@ function toggleDarkMode() {
   $('.modal-content').toggleClass('dark-dialog');
   $('.nes-radio').toggleClass('is-dark');
   $('.nes-balloon').toggleClass('is-dark');
+  $('.loading-bg').toggleClass('dark-loading-bg');
+  $('.loading-container p').toggleClass('dark-title');
 }
 
 $('#dark-mode-on').click(() => {
@@ -354,6 +356,15 @@ function addTouchToStart() {
     }
   });
 };
+
+// prefers color scheme
+
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+if (prefersDark) {
+  toggleDarkMode();
+  toggleDarkModeRadio();
+}
 
 // 'LOADING' BAR
 

@@ -75,6 +75,14 @@ h2 {
   background-color: #F1F1F1;
 }
 
+.dark-loading-bg {
+  background-color: #212529;
+}
+
+.dark-title {
+  color: #F1F1F1;
+}
+
 .loading-container {
   margin: 0 auto;
   width: 50%;
