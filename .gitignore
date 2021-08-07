@@ -1,3 +1,4 @@
-node_modules/
+/node_modules
+
 TODOs.txt
 .DS_Store
