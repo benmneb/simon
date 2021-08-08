@@ -6,6 +6,11 @@ import mongoSanitize from 'express-mongo-sanitize';
 import xss from 'xss-clean';
 import hpp from 'hpp';
 
+import initDb from './db/index.js';
+import routes from './routes/index.js';
+
+const port = process.env.PORT || 5000;
+
 const app = express();
 
 const limiter = rateLimit({
@@ -22,8 +27,11 @@ app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!!1 🤓');
-});
-
-export default app;
+(async function () {
+  try {
+    const db = await initDb();
+    routes(app, db).listen(port, () => console.log(`✅ Server live on port ${port}`));
+  } catch (error) {
+    console.error('❌ Server connection error:', error);
+  }
+})();

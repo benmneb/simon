@@ -1,14 +1,14 @@
 {
   "name": "api",
   "version": "0.1.0",
-  "main": "server.js",
+  "main": "app.js",
   "keywords": [],
   "author": "benmneb",
-  "license": "ISC",
+  "license": "CC0",
   "description": "Simple simon game",
   "type": "module",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

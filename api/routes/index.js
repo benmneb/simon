@@ -1,4 +1,8 @@
-const getScores = (app, db) => {
+export default function routes(app, db) {
+  app.get('/', (req, res) => {
+    res.send('Hello World!!1 🤓');
+  });
+
   app.get('/api', async (req, res) => {
     try {
       const response = await db.collection('highScores').find().limit(5).toArray();
@@ -8,9 +12,7 @@ const getScores = (app, db) => {
       console.error('Error getting scores:', error.message);
     }
   });
-};
 
-const addScore = (app, db) => {
   app.post('/api', async (req, res) => {
     const { name, score } = req.body;
 
@@ -23,6 +25,6 @@ const addScore = (app, db) => {
       console.error('Error adding score:', error.message);
     }
   });
-};
 
-export default [getScores, addScore];
+  return app;
+}
