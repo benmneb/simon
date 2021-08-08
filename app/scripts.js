@@ -23,16 +23,18 @@ let isOptionsOpen = false;
 // GAME-PLAY
 
 function nextSequence() {
-  let randomNumber = (Math.floor(Math.random() * 4));
+  let randomNumber = Math.floor(Math.random() * 4);
   let randomChosenColor = buttonColors[randomNumber];
-  $('#' + [randomChosenColor]).fadeOut(100).fadeIn(100);
+  $('#' + [randomChosenColor])
+    .fadeOut(100)
+    .fadeIn(100);
   playSound(randomChosenColor);
   gamePattern.push(randomChosenColor);
   userClickedPattern = [];
-  $('h1').text('Level ' + level)
+  $('h1').text('Level ' + level);
 }
 
-$('.game-btn').on('click touchstart', function() {
+$('.game-btn').on('click touchstart', function () {
   if (started) {
     let userChosenColor = this.id;
     userClickedPattern.push(userChosenColor);
@@ -40,7 +42,7 @@ $('.game-btn').on('click touchstart', function() {
     animatePress(userChosenColor);
     checkAnswer(userClickedPattern.length - 1);
     return false;
-  };
+  }
 });
 
 function checkAnswer(currentLevel) {
@@ -50,10 +52,10 @@ function checkAnswer(currentLevel) {
       setTimeout(() => {
         $('h1').text('Level ' + level);
         calculateHighScore();
-      }, 500)
+      }, 500);
       setTimeout(() => {
         nextSequence();
-      }, 1000)
+      }, 1000);
     }
   } else {
     playSound('wrong');
@@ -63,7 +65,7 @@ function checkAnswer(currentLevel) {
       $('#subtitle').text('Tap Anywhere to Restart');
     } else {
       $('#subtitle').text('Press Spacebar to Restart');
-    };
+    }
     $('body').addClass('game-over');
     setTimeout(() => {
       $('body').removeClass('game-over');
@@ -80,10 +82,10 @@ function startOver() {
 
 function animatePress(currentColor) {
   $('#' + currentColor).addClass('pressed');
-  setTimeout(function() {
+  setTimeout(function () {
     $('#' + currentColor).removeClass('pressed');
-  }, 100)
-};
+  }, 100);
+}
 
 // SOUNDS
 
@@ -99,7 +101,7 @@ function playSound(name) {
     let sound = new Audio('sounds/' + name + '.mp3');
     sound.play();
   }
-};
+}
 
 function toggleMuteEverything() {
   if (muteEverything) {
@@ -110,14 +112,14 @@ function toggleMuteEverything() {
 }
 
 function toggleMuteEverythingRadio() {
-  $('input[name="sound"]').not(':checked').prop("checked", true);
+  $('input[name="sound"]').not(':checked').prop('checked', true);
 }
 
 // KEY-PRESSES
 
 function startGame() {
   started = true;
-  $('h1').text('Level ' + level)
+  $('h1').text('Level ' + level);
   calculateHighScore();
   setTimeout(() => {
     nextSequence();
@@ -130,7 +132,7 @@ $(document).on('keydown', (e) => {
     case 32: // spacebar
       if (!started && !isOptionsOpen && !isAboutOpen && !isHowToPlayOpen) {
         startGame();
-      };
+      }
       break;
     case 72: // 'h'
       if (!isOptionsOpen && !isAboutOpen) {
@@ -140,8 +142,8 @@ $(document).on('keydown', (e) => {
         } else {
           $('#how-to-play').hide();
           isHowToPlayOpen = false;
-        };
-      };
+        }
+      }
       break;
     case 65: // 'a'
       if (!isHowToPlayOpen && !isOptionsOpen) {
@@ -151,8 +153,8 @@ $(document).on('keydown', (e) => {
         } else {
           $('#about').hide();
           isAboutOpen = false;
-        };
-      };
+        }
+      }
       break;
     case 79: // 'o'
       if (!isHowToPlayOpen && !isAboutOpen) {
@@ -162,14 +164,14 @@ $(document).on('keydown', (e) => {
         } else {
           $('#options').hide();
           isOptionsOpen = false;
-        };
-      };
+        }
+      }
       break;
     case 68: // 'd'
       if (!isHowToPlayOpen && !isAboutOpen) {
         toggleDarkMode();
         toggleDarkModeRadio();
-      };
+      }
       break;
     case 83: // 's'
       if (!isHowToPlayOpen && !isAboutOpen && !isOptionsOpen) {
@@ -179,7 +181,7 @@ $(document).on('keydown', (e) => {
       } else if (isOptionsOpen) {
         toggleMuteEverything();
         toggleMuteEverythingRadio();
-      };
+      }
       break;
     case 67: // 'c'
     case 13: // enter
@@ -191,26 +193,26 @@ $(document).on('keydown', (e) => {
         isAboutOpen = false;
         $('#about').hide();
         isOptionsOpen = false;
-      };
+      }
       break;
     case 71: // 'g'
     case 86: // 'v'
       if (isAboutOpen) {
-        window.open('https://github.com/benmneb', '_blank')
+        window.open('https://github.com/benmneb', '_blank');
       }
       break;
     case 84: // 't'
       if (isAboutOpen) {
-        window.open('https://www.appbrewery.co/', '_blank')
+        window.open('https://www.appbrewery.co/', '_blank');
       }
       break;
     case 78: // 'n'
       if (isAboutOpen) {
-        window.open('https://github.com/nostalgic-css/NES.css', '_blank')
+        window.open('https://github.com/nostalgic-css/NES.css', '_blank');
       }
       break;
     default:
-      null
+      null;
   }
 });
 
@@ -232,52 +234,52 @@ function blinkText() {
   if (!started) {
     $('#subtitle').css('visibility', 'hidden');
     setTimeout(() => {
-      $('#subtitle').css('visibility', 'visible')
+      $('#subtitle').css('visibility', 'visible');
     }, 200);
   }
-};
+}
 setInterval(blinkText, 1500);
 
 function togglePointers() {
   $('div[type=button]').toggleClass('pointer');
-};
+}
 
 function showSoundsNotification() {
   if (muteEverything) {
-    $('#sound-notification-text').text('Sounds off.')
+    $('#sound-notification-text').text('Sounds off.');
   } else if (!muteEverything) {
-    $('#sound-notification-text').text('Sounds on.')
-  };
+    $('#sound-notification-text').text('Sounds on.');
+  }
   $('#sound-notification').show().delay(2000).slideUp();
-};
+}
 
 // DIALOGS
 
 // open
-$("#open-how-to-play").click(() => {
-  $("#how-to-play").show();
+$('#open-how-to-play').click(() => {
+  $('#how-to-play').show();
   isHowToPlayOpen = true;
 });
-$("#open-about").click(() => {
-  $("#about").show();
+$('#open-about').click(() => {
+  $('#about').show();
   isAboutOpen = true;
 });
-$("#open-options").click(() => {
-  $("#options").show();
+$('#open-options').click(() => {
+  $('#options').show();
   isOptionsOpen = true;
 });
 
 // close
-$("#close-how-to-play").click(() => {
-  $("#how-to-play").hide();
+$('#close-how-to-play').click(() => {
+  $('#how-to-play').hide();
   isHowToPlayOpen = false;
 });
-$("#close-options").click(() => {
-  $("#options").hide();
+$('#close-options').click(() => {
+  $('#options').hide();
   isOptionsOpen = false;
 });
-$("#close-about").click(() => {
-  $("#about").hide();
+$('#close-about').click(() => {
+  $('#about').hide();
   isAboutOpen = false;
 });
 
@@ -298,7 +300,7 @@ $("#close-about").click(() => {
 // DARK-MODE
 
 function toggleDarkMode() {
-  darkMode ? darkMode = false : darkMode = true;
+  darkMode ? (darkMode = false) : (darkMode = true);
   $('body').toggleClass('dark-body');
   $('h1').toggleClass('dark-h1');
   $('.headings h2').toggleClass('dark-h2');
@@ -315,16 +317,16 @@ $('#dark-mode-on').click(() => {
   if (!darkMode) {
     toggleDarkMode();
   }
-})
+});
 
 $('#dark-mode-off').click(() => {
   if (darkMode) {
     toggleDarkMode();
   }
-})
+});
 
 function toggleDarkModeRadio() {
-  $('input[name="dark-mode"]').not(':checked').prop("checked", true);
+  $('input[name="dark-mode"]').not(':checked').prop('checked', true);
 }
 
 // MEDIA-QUERIES
@@ -338,24 +340,24 @@ function deviceWidth() {
   } else {
     if (!started) {
       $('#subtitle').text('Press Spacebar to Start');
-    };
+    }
     $('.keyboards-only').show();
     $('.hotkey').removeClass('hotkey-gone');
-  };
-};
+  }
+}
 const smlDevice = window.matchMedia('(max-width: 800px)');
 smlDevice.addListener(deviceWidth);
 deviceWidth(smlDevice);
 
 // start game on click anywhere except the buttons and their dialogs
 function addTouchToStart() {
-  $(document).click(function(event) {
+  $(document).click(function (event) {
     const target = $(event.target);
     if (!target.closest('.dont-start').length && !started && smlDevice.matches) {
       startGame();
     }
   });
-};
+}
 
 // prefers color scheme
 
@@ -369,20 +371,20 @@ if (prefersDark) {
 // 'LOADING' BAR
 
 function load() {
-  var progress = 0;
-  var speed = setInterval(frame, (Math.random() * 50));
+  let progress = 0;
+  let speed = setInterval(frame, Math.random() * 50);
 
   function frame() {
     if (progress >= 100) {
       clearInterval(speed);
       setTimeout(() => {
         $('.loading-bg').fadeOut(50);
-      }, 200)
+      }, 200);
     } else {
-      progress += (Math.random() * 5);
+      progress += Math.random() * 5;
       $('.nes-progress').attr('value', progress);
     }
-  };
-};
+  }
+}
 
 $(document).ready(load());

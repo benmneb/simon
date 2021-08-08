@@ -1,6 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/prettierrc",
-  "printWidth": 125,
+  "printWidth": 90,
   "arrowParens": "always",
   "bracketSpacing": true,
   "singleQuote": true,
