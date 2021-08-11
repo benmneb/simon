@@ -359,7 +359,6 @@ function toggleDarkModeRadio() {
 // MEDIA-QUERIES
 
 function deviceWidth() {
-  console.log('device wdith');
   if (smlDevice.matches) {
     $('#subtitle').text('Tap Anywhere to Start');
     $('.keyboards-only').hide();
@@ -397,7 +396,6 @@ if (prefersDark) {
 // LEADERBOARD
 
 function setLeaderboard(data) {
-  console.log('leaderboard set:', data);
   leaderboard = data;
   $('#leaderboard-body').empty();
   leaderboard.map((leader, index) => {
@@ -481,7 +479,6 @@ async function submitHighScore() {
       body: JSON.stringify(data),
     });
     const response = await request.json();
-    console.log('high score submitted:', response);
     await getScores();
     $('#add-high-score').hide();
     isAddHighScoreOpen = false;
