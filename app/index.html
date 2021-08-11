@@ -17,7 +17,7 @@
   <body>
     <section class="loading-bg">
       <div class="loading-container">
-        <p class="title">Loading...</p>
+        <p class="font-bold">Loading...</p>
         <progress class="nes-progress is-primary" value="0" max="100"></progress>
       </div>
     </section>
@@ -69,7 +69,7 @@
 
     <section id="how-to-play" class="dialog-bg dont-start">
       <article class="dialog-content how-to-play">
-        <p class="title">How to Play</p>
+        <p class="font-bold">How to Play</p>
         <p>Simon randomly flashes a color one at a time. Your job is to remember the order and click on them to prove it.</p>
         <p>There are infinite levels. The game ends when your memory fails.</p>
         <menu class="dialog-menu padding-left-0 margin-btm-0">
@@ -80,7 +80,7 @@
 
     <section id="options" class="dialog-bg dont-start">
       <div class="dialog-content options">
-        <p class="title">Options</p>
+        <p class="font-bold">Options</p>
         <div class="flex-justify-center">
           <table class="align-self-center text-left">
             <tbody>
@@ -129,7 +129,7 @@
 
     <section id="about" class="dialog-bg dont-start">
       <article class="dialog-content about">
-        <p class="title">About</p>
+        <p class="font-bold">About</p>
         <p>Made as an extension to a <a href="https://www.appbrewery.co/" target="_blank" class="hotkey">TAB project</a></p>
         <p>
           8-bit graphics by <a href="https://github.com/nostalgic-css/NES.css" target="_blank" class="hotkey">NES.css</a>
@@ -147,7 +147,7 @@
 
     <section id="leaderboard" class="dialog-bg dont-start">
       <article class="dialog-content leaderboard">
-        <p class="title flex-aligned-center flex-space-around">
+        <p class="font-bold flex-aligned-center flex-space-around">
           <i class="nes-icon trophy is-medium"></i><span>Leaderboard</span><i class="nes-icon trophy is-medium"></i>
         </p>
         <table class="nes-table is-centered">
@@ -167,13 +167,21 @@
 
     <section id="add-high-score" class="dialog-bg">
       <article class="dialog-content add-high-score">
-        <p class="title flex-aligned-center flex-space-around">
-          <i class="nes-icon trophy is-medium"></i>Congratulations!<i class="nes-icon trophy is-medium"></i>
+        <p class="font-bold flex-aligned-center flex-space-around">
+          <i class="nes-icon star is-medium"></i>Congratulations!<i class="nes-icon star is-medium"></i>
         </p>
-        <p>
-          You reached level <span id="success-level"></span> and made it to position <span id="success-position"></span> on
-          the global leaderboard.
-        </p>
+        <div class="text-left">
+          Level:
+          <span class="nes-badge is-icon top--8">
+            <span class="display-none"></span>
+            <span id="success-level" class="is-primary font-bold"></span> </span
+          ><br />
+          Leaderboard:
+          <span class="nes-badge is-icon top--8">
+            <span class="is-warning"><i class="nes-icon trophy is-small"></i></span>
+            <span id="success-position" class="is-primary font-bold"></span>
+          </span>
+        </div>
         <div class="nes-field">
           <label for="name" id="name-label">Your name:</label>
           <input
@@ -182,7 +190,8 @@
             class="nes-input text-center margin-btm"
             autocomplete="off"
             autocapitalize="none"
-            required
+            spellcheck="false"
+            autofocus
           />
           <button type="button" id="submit-high-score" class="nes-btn is-primary">Submit</button>
           <button type="button" id="close-add-high-score" class="nes-btn">Cancel</button>

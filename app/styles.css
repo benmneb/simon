@@ -40,8 +40,8 @@ h1 {
 /*  SECTIONS  */
 
 .headings {
-  margin: 5%;
-  margin-top: 2%;
+  margin: 3rem;
+  margin-top: 1rem;
 }
 
 .btns-container {
@@ -59,7 +59,7 @@ h1 {
 
 .controls {
   font-size: 1rem;
-  margin: 3%;
+  margin: 2rem;
 }
 
 .pop-over {
@@ -261,7 +261,7 @@ h1 {
   margin-bottom: 12px;
 }
 
-.title {
+.font-bold {
   font-weight: bold;
 }
 
@@ -290,6 +290,14 @@ h1 {
 
 .align-self-center {
   align-self: center;
+}
+
+.top--8 {
+  top: -8px;
+}
+
+.display-none {
+  display: none;
 }
 
 .avoid-wrap {
