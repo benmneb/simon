@@ -410,7 +410,7 @@ function setLeaderboard(data) {
 // fetch scores on intial page load
 async function getScores() {
   try {
-    const response = await fetch('http://localhost:5000/api');
+    const response = await fetch('https://simon-api.herokuapp.com/api');
     const data = await response.json();
     setLeaderboard(data);
   } catch (error) {
@@ -473,7 +473,7 @@ async function submitHighScore() {
   };
 
   try {
-    const request = await fetch('http://localhost:5000/api', {
+    const request = await fetch('https://simon-api.herokuapp.com/api', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
