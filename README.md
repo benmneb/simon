@@ -1,15 +1,23 @@
 # 🕹 Simple `Simon` Game
 
-**[Play for free!](https://simple-simon.surge.sh/)**
-
-My first jQuery thing 🤓
+**[Play now for free!](https://simple-simon.surge.sh/)**
 
 ## Features
 
-- Fully useable with keyboard or mouse
+- **¡NEW!** Global leaderboard of high scores
+- Keyboard navigation
 - Fake loading bar
 - Dark/light themes
 - Audio is mutable
+
+## Stack
+
+- jQuery
+- CSS3
+- NodeJS/ExpressJS
+- MongoDB Atlas
+- Front-end hosted on Surge
+- Back-end hosted on Heroku
 
 ## How to play
 
