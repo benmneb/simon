@@ -190,6 +190,7 @@ $(document).on('keydown', (e) => {
           isLeaderboardOpen = false;
         }
       }
+      break;
     case 68: // 'd'
       if (!isHowToPlayOpen && !isAboutOpen && !isLeaderboardOpen && !isAddHighScoreOpen) {
         toggleDarkMode();
