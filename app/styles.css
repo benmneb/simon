@@ -156,7 +156,15 @@ h1 {
 }
 
 .leaderboard table {
-  width: 80%;
+  width: 70%;
+}
+
+.leaderboard table th {
+  border-right: none;
+}
+
+.leaderboard table td {
+  border: none;
 }
 
 .add-high-score {

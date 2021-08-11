@@ -399,11 +399,7 @@ function setLeaderboard(data) {
   leaderboard = data;
   $('#leaderboard-body').empty();
   leaderboard.map((leader, index) => {
-    $(
-      `<tr><td class="user-name text-left">${
-        index === 0 ? `<i class="nes-icon star is-small"></i> ${leader.name}` : leader.name
-      }</td><td>${leader.score}</tr>`
-    ).appendTo('#leaderboard-body');
+    $(`<tr><td class="user-name text-left">${leader.name}</td><td>${leader.score}</tr>`).appendTo('#leaderboard-body');
   });
 }
 
