@@ -41,6 +41,12 @@
           </button>
         </span>
         <span class="avoid-wrap">
+          <span class="keyboards-only">'L' for</span>
+          <button type="button" id="open-leaderboard" class="nes-btn dont-start">
+            <span class="hotkey">Leaderboard</span>
+          </button>
+        </span>
+        <span class="avoid-wrap">
           <span class="keyboards-only">'O' for</span>
           <button type="button" id="open-options" class="nes-btn dont-start">
             <span class="hotkey">Options</span>
@@ -60,8 +66,8 @@
         <p class="title">How to Play</p>
         <p>Simon randomly flashes a color one at a time. Your job is to remember the order and click on them to prove it.</p>
         <p>There are infinite levels. The game ends when your memory fails.</p>
-        <menu class="dialog-menu padding-left-0">
-          <button id="close-how-to-play" class="nes-btn is-primary hotkey">Confirm</button>
+        <menu class="dialog-menu padding-left-0 margin-btm-0">
+          <button id="close-how-to-play" class="nes-btn hotkey">Close</button>
         </menu>
       </article>
     </section>
@@ -69,7 +75,7 @@
     <section id="options" class="dialog-bg dont-start">
       <div class="dialog-content options">
         <p class="title">Options</p>
-        <div class="flex-center">
+        <div class="flex-justify-center">
           <table class="align-self-center text-left">
             <tbody>
               <tr>
@@ -109,7 +115,7 @@
             </tbody>
           </table>
         </div>
-        <menu class="dialog-menu padding-left-0">
+        <menu class="dialog-menu padding-left-0 margin-btm-0">
           <button id="close-options" class="nes-btn is-primary hotkey">Confirm</button>
         </menu>
       </div>
@@ -126,10 +132,55 @@
           ><i class="nes-icon github is-large"></i>
           <p>benmneb</p>
         </a>
-        <menu class="dialog-menu padding-left-0">
+        <menu class="dialog-menu padding-left-0 margin-btm-0">
           <button id="close-about" class="nes-btn hotkey">Close</button>
           <a class="nes-btn is-primary hotkey" href="https://github.com/benmneb/simon" target="_blank">View on GitHub</a>
         </menu>
+      </article>
+    </section>
+
+    <section id="leaderboard" class="dialog-bg dont-start">
+      <article class="dialog-content leaderboard">
+        <p class="title flex-aligned-center flex-space-around">
+          <i class="nes-icon trophy is-medium"></i><span>Leaderboard</span><i class="nes-icon trophy is-medium"></i>
+        </p>
+        <table class="nes-table is-centered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Level</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body"></tbody>
+        </table>
+        <menu class="dialog-menu padding-left-0 margin-btm-0">
+          <button id="close-leaderboard" class="nes-btn hotkey">Close</button>
+        </menu>
+      </article>
+    </section>
+
+    <section id="add-high-score" class="dialog-bg">
+      <article class="dialog-content add-high-score">
+        <p class="title flex-aligned-center flex-space-around">
+          <i class="nes-icon trophy is-medium"></i>Congratulations!<i class="nes-icon trophy is-medium"></i>
+        </p>
+        <p>
+          You reached level <span id="success-level"></span> and made it to position <span id="success-position"></span> on
+          the global leaderboard.
+        </p>
+        <div class="nes-field">
+          <label for="name" id="name-label">Your name:</label>
+          <input
+            type="text"
+            id="name"
+            class="nes-input text-center margin-btm"
+            autocomplete="off"
+            autocapitalize="none"
+            required
+          />
+          <button type="button" id="submit-high-score" class="nes-btn is-primary">Submit</button>
+          <button type="button" id="close-add-high-score" class="nes-btn">Cancel</button>
+        </div>
       </article>
     </section>
 

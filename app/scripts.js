@@ -5,6 +5,7 @@ let gamePattern = [];
 let userClickedPattern = [];
 
 let buttonColors = ['red', 'blue', 'green', 'yellow'];
+let buttonsClickable = false;
 
 let level = 1;
 
@@ -19,6 +20,12 @@ let darkMode = false;
 let isHowToPlayOpen = false;
 let isAboutOpen = false;
 let isOptionsOpen = false;
+let isLeaderboardOpen = false;
+let isAddHighScoreOpen = false;
+
+let leaderboard = null;
+
+let nameIsValid = false;
 
 // GAME-PLAY
 
@@ -35,7 +42,7 @@ function nextSequence() {
 }
 
 $('.game-btn').on('click touchstart', function () {
-  if (started) {
+  if (started && buttonsClickable) {
     let userChosenColor = this.id;
     userClickedPattern.push(userChosenColor);
     playSound(userChosenColor);
@@ -48,12 +55,14 @@ $('.game-btn').on('click touchstart', function () {
 function checkAnswer(currentLevel) {
   if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
     if (userClickedPattern.length === gamePattern.length) {
+      buttonsClickable = false;
       level++;
       setTimeout(() => {
         $('h1').text('Level ' + level);
         calculateHighScore();
       }, 500);
       setTimeout(() => {
+        buttonsClickable = true;
         nextSequence();
       }, 1000);
     }
@@ -75,9 +84,11 @@ function checkAnswer(currentLevel) {
 }
 
 function startOver() {
+  checkIfHighScore();
   level = 1;
   gamePattern = [];
   started = false;
+  $('footer').fadeIn(50);
 }
 
 function animatePress(currentColor) {
@@ -119,8 +130,10 @@ function toggleMuteEverythingRadio() {
 
 function startGame() {
   started = true;
+  buttonsClickable = true;
   $('h1').text('Level ' + level);
   calculateHighScore();
+  $('footer').fadeOut(50);
   setTimeout(() => {
     nextSequence();
     togglePointers();
@@ -130,14 +143,14 @@ function startGame() {
 $(document).on('keydown', (e) => {
   switch (e.keyCode) {
     case 32: // spacebar
-      if (!started && !isOptionsOpen && !isAboutOpen && !isHowToPlayOpen) {
+      if (!started && !isOptionsOpen && !isAboutOpen && !isHowToPlayOpen && !isLeaderboardOpen && !isAddHighScoreOpen) {
         startGame();
       }
       break;
     case 72: // 'h'
-      if (!isOptionsOpen && !isAboutOpen) {
+      if (!isOptionsOpen && !isAboutOpen && !isLeaderboardOpen && !isAddHighScoreOpen) {
         if (!isHowToPlayOpen) {
-          $('#how-to-play').show();
+          $('#how-to-play').fadeIn(50);
           isHowToPlayOpen = true;
         } else {
           $('#how-to-play').hide();
@@ -146,7 +159,7 @@ $(document).on('keydown', (e) => {
       }
       break;
     case 65: // 'a'
-      if (!isHowToPlayOpen && !isOptionsOpen) {
+      if (!isHowToPlayOpen && !isOptionsOpen && !isLeaderboardOpen && !isAddHighScoreOpen) {
         if (!isAboutOpen) {
           $('#about').show();
           isAboutOpen = true;
@@ -157,7 +170,7 @@ $(document).on('keydown', (e) => {
       }
       break;
     case 79: // 'o'
-      if (!isHowToPlayOpen && !isAboutOpen) {
+      if (!isHowToPlayOpen && !isAboutOpen && !isLeaderboardOpen && !isAddHighScoreOpen) {
         if (!isOptionsOpen) {
           $('#options').show();
           isOptionsOpen = true;
@@ -167,14 +180,24 @@ $(document).on('keydown', (e) => {
         }
       }
       break;
+    case 76: // 'l'
+      if (!isHowToPlayOpen && !isAboutOpen && !isOptionsOpen && !isAddHighScoreOpen) {
+        if (!isLeaderboardOpen) {
+          $('#leaderboard').show();
+          isLeaderboardOpen = true;
+        } else {
+          $('#leaderboard').hide();
+          isLeaderboardOpen = false;
+        }
+      }
     case 68: // 'd'
-      if (!isHowToPlayOpen && !isAboutOpen) {
+      if (!isHowToPlayOpen && !isAboutOpen && !isLeaderboardOpen && !isAddHighScoreOpen) {
         toggleDarkMode();
         toggleDarkModeRadio();
       }
       break;
     case 83: // 's'
-      if (!isHowToPlayOpen && !isAboutOpen && !isOptionsOpen) {
+      if (!isHowToPlayOpen && !isAboutOpen && !isOptionsOpen && !isLeaderboardOpen && !isAddHighScoreOpen) {
         toggleMuteEverything();
         toggleMuteEverythingRadio();
         showSoundsNotification();
@@ -186,13 +209,17 @@ $(document).on('keydown', (e) => {
     case 67: // 'c'
     case 13: // enter
     case 27: // escape
-      if (isHowToPlayOpen || isAboutOpen || isOptionsOpen) {
+      if (isHowToPlayOpen || isAboutOpen || isOptionsOpen || isLeaderboardOpen) {
         $('#how-to-play').hide();
         isHowToPlayOpen = false;
         $('#options').hide();
         isAboutOpen = false;
         $('#about').hide();
         isOptionsOpen = false;
+        $('#leaderboard').hide();
+        isLeaderboardOpen = false;
+        $('#add-high-score').hide();
+        isAddHighScoreOpen = false;
       }
       break;
     case 71: // 'g'
@@ -221,11 +248,10 @@ $(document).on('keydown', (e) => {
 function calculateHighScore() {
   if (highScore <= level) {
     highScore = level;
-    $('#subtitle').html(`High score: ${highScore}`);
   } else {
     highScore = highScore;
-    $('#subtitle').text(`High score: ${highScore}`);
   }
+  $('#subtitle').text(`Highest level: ${highScore}`);
 }
 
 // MISC AESTHETICS
@@ -268,6 +294,10 @@ $('#open-options').click(() => {
   $('#options').show();
   isOptionsOpen = true;
 });
+$('#open-leaderboard').click(() => {
+  $('#leaderboard').show();
+  isLeaderboardOpen = true;
+});
 
 // close
 $('#close-how-to-play').click(() => {
@@ -282,20 +312,16 @@ $('#close-about').click(() => {
   $('#about').hide();
   isAboutOpen = false;
 });
-
-// const howToPlay = $("#how-to-play")[0];
-// const options = $("#options")[0];
-// const about = $("#about")[0];
-
-// window.onclick = (e) => {
-//   if (event.target == howToPlay) {
-//     howToPlay.style.display = "none";
-//   } else if (event.target == options) {
-//     options.style.display = "none";
-//   } else if (event.target == about) {
-//     about.style.display = "none";
-//   }
-// }
+$('#close-leaderboard').click(() => {
+  $('#leaderboard').hide();
+  isLeaderboardOpen = false;
+});
+$('#close-add-high-score').click(() => {
+  $('#add-high-score').hide();
+  isAddHighScoreOpen = false;
+  $('#name').removeClass('is-error');
+  $('#name-label').removeClass('nes-text is-error');
+});
 
 // DARK-MODE
 
@@ -311,6 +337,7 @@ function toggleDarkMode() {
   $('.nes-balloon').toggleClass('is-dark');
   $('.loading-bg').toggleClass('dark-loading-bg');
   $('.loading-container p').toggleClass('dark-title');
+  $('.leaderboard table').toggleClass('is-dark');
 }
 
 $('#dark-mode-on').click(() => {
@@ -332,6 +359,7 @@ function toggleDarkModeRadio() {
 // MEDIA-QUERIES
 
 function deviceWidth() {
+  console.log('device wdith');
   if (smlDevice.matches) {
     $('#subtitle').text('Tap Anywhere to Start');
     $('.keyboards-only').hide();
@@ -346,12 +374,11 @@ function deviceWidth() {
   }
 }
 const smlDevice = window.matchMedia('(max-width: 800px)');
-smlDevice.addListener(deviceWidth);
-deviceWidth(smlDevice);
+smlDevice.addEventListener('change', deviceWidth);
 
-// start game on click anywhere except the buttons and their dialogs
+// on mobile size screens: start game on touch anywhere except the buttons and their dialogs
 function addTouchToStart() {
-  $(document).click(function (event) {
+  $(document).click((event) => {
     const target = $(event.target);
     if (!target.closest('.dont-start').length && !started && smlDevice.matches) {
       startGame();
@@ -360,7 +387,6 @@ function addTouchToStart() {
 }
 
 // prefers color scheme
-
 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 if (prefersDark) {
@@ -368,9 +394,110 @@ if (prefersDark) {
   toggleDarkModeRadio();
 }
 
+// LEADERBOARD
+
+function setLeaderboard(data) {
+  console.log('leaderboard set:', data);
+  leaderboard = data;
+  $('#leaderboard-body').empty();
+  leaderboard.map((leader, index) => {
+    $(
+      `<tr><td class="user-name">${
+        index === 0
+          ? `<i class="nes-icon star is-small"></i> ${leader.name} <i class="nes-icon star is-small"></i>`
+          : leader.name
+      }</td><td>${leader.score}</tr>`
+    ).appendTo('#leaderboard-body');
+  });
+}
+
+// fetch scores on intial page load
+async function getScores() {
+  try {
+    const response = await fetch('http://localhost:5000/api');
+    const data = await response.json();
+    setLeaderboard(data);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+// check score on game over
+function checkIfHighScore() {
+  if (leaderboard.length < 5 || level > leaderboard[leaderboard.length - 1].score) {
+    let position = leaderboard.findIndex((leader) => level >= Number(leader.score)) + 1;
+    if (leaderboard.findIndex((leader) => level === Number(leader.score)) > -1) {
+      // equaled a currently existing high-score, so place the new score below it on leaderboard
+      position = position + 1;
+    }
+    $('#success-level').text(level);
+    $('#success-position').text(position === 0 ? 1 : position);
+    $('#score').val(level);
+    $('#add-high-score').show();
+    isAddHighScoreOpen = true;
+  }
+}
+
+// submit score
+function validateName() {
+  nameIsValid = false;
+  let enteredName = $('#name').val();
+  if (!enteredName) {
+    $('#name').addClass('is-error');
+    $('#name-label').addClass('nes-text is-error');
+    setTimeout(() => {
+      $('#name').removeClass('is-error');
+      $('#name-label').removeClass('nes-text is-error');
+    }, 2000);
+  } else if (enteredName.length > 7) {
+    $('#name').addClass('is-error');
+    $('#name-label').text('Name too long').addClass('nes-text is-error');
+    setTimeout(() => {
+      $('#name').removeClass('is-error');
+      $('#name-label').text('Your name:').removeClass('nes-text is-error');
+    }, 2000);
+  } else {
+    $('#name').removeClass('is-error');
+    $('#name-label').text('Your name:').removeClass('nes-text is-error');
+    nameIsValid = true;
+  }
+}
+
+async function submitHighScore() {
+  const data = {
+    name: $('#name').val(),
+    score: $('#success-level').text(),
+  };
+
+  try {
+    const request = await fetch('http://localhost:5000/api', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const response = await request.json();
+    console.log('high score submitted:', response);
+    await getScores();
+    $('#add-high-score').hide();
+    isAddHighScoreOpen = false;
+    $('#leaderboard').show();
+    isLeaderboardOpen = true;
+  } catch (error) {
+    console.error('Error submitting score:', error.message);
+  }
+}
+
+$('#submit-high-score').click((e) => {
+  e.preventDefault();
+  validateName();
+  if (nameIsValid) {
+    submitHighScore();
+  }
+});
+
 // 'LOADING' BAR
 
-function load() {
+function pretendToLoad() {
   let progress = 0;
   let speed = setInterval(frame, Math.random() * 50);
 
@@ -387,4 +514,7 @@ function load() {
   }
 }
 
-$(document).ready(load());
+$(document).ready(() => {
+  pretendToLoad();
+  getScores();
+});
