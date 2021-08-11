@@ -167,6 +167,19 @@ h1 {
   border: none;
 }
 
+.leaderboard table td::before,
+.leaderboard table th::before {
+  display: none;
+}
+
+.leaderboard table td::after {
+  display: none;
+}
+
+.leaderboard-loading {
+  height: 295.4px;
+}
+
 .add-high-score {
   width: 20%;
   min-width: var(--dialog-min-width);
