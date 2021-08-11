@@ -428,8 +428,8 @@ function prettyPosition(position) {
 // check score on game over
 function checkIfHighScore() {
   if (leaderboard.length < 5 || level > leaderboard[leaderboard.length - 1].score) {
-    let position = leaderboard.findIndex((leader) => level >= Number(leader.score)) + 1;
-    if (leaderboard.findIndex((leader) => level === Number(leader.score)) > -1) {
+    let position = leaderboard.findIndex((leader) => level >= leader.score) + 1;
+    if (leaderboard.findIndex((leader) => level === leader.score) > -1) {
       // equaled a currently existing high-score, so place the new score below it on leaderboard
       position = position + 1;
     }
@@ -469,7 +469,7 @@ function validateName() {
 async function submitHighScore() {
   const data = {
     name: $('#name').val(),
-    score: $('#success-level').text(),
+    score: Number($('#success-level').text()),
   };
 
   try {
