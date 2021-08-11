@@ -422,6 +422,13 @@ async function getScores() {
   }
 }
 
+function prettyPosition(position) {
+  if (position === 1) return '1st';
+  if (position === 2) return '2nd';
+  if (position === 3) return '3rd';
+  else return `${position}th`;
+}
+
 // check score on game over
 function checkIfHighScore() {
   if (leaderboard.length < 5 || level > leaderboard[leaderboard.length - 1].score) {
@@ -431,7 +438,7 @@ function checkIfHighScore() {
       position = position + 1;
     }
     $('#success-level').text(level);
-    $('#success-position').text(position === 0 ? 1 : position);
+    $('#success-position').text(prettyPosition(position));
     $('#score').val(level);
     $('#add-high-score').show();
     isAddHighScoreOpen = true;
