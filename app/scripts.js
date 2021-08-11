@@ -490,8 +490,14 @@ async function submitHighScore() {
 $('#submit-high-score').click((e) => {
   e.preventDefault();
   validateName();
-  if (nameIsValid) {
-    submitHighScore();
+  if (nameIsValid) submitHighScore();
+});
+
+$('#name').on('keydown', (e) => {
+  // 'enter' key
+  if (e.keyCode === 13) {
+    validateName();
+    if (nameIsValid) submitHighScore();
   }
 });
 
