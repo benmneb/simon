@@ -1,6 +1,6 @@
 # 🕹 Simple `Simon` Game
 
-**[Play now for free!](https://simple-simon.surge.sh/)**
+**[Play now for free! ↗️](https://simple-simon.surge.sh/)**
 
 ## Features
 
@@ -12,10 +12,10 @@
 
 ## Stack
 
-- jQuery
-- CSS3
-- NodeJS/ExpressJS
-- MongoDB Atlas
+- HTML5 / CSS3 / jQuery
+- NodeJS / ExpressJS
+- MongoDB Native NodeJS Driver (no MongooseJS 🙅‍♂️)
+- Database on MongoDB Atlas
 - Front-end hosted on Surge
 - Back-end hosted on Heroku
 
