@@ -150,7 +150,10 @@
         <p class="font-bold flex-aligned-center flex-space-around">
           <i class="nes-icon trophy is-medium"></i><span>Leaderboard</span><i class="nes-icon trophy is-medium"></i>
         </p>
-        <table class="nes-table is-centered">
+        <div id="leaderboard-loading" class="display-none leaderboard-loading flex-aligned-center">
+          <span>Getting latest...</span>
+        </div>
+        <table id="leaderboard-table" class="nes-table is-centered">
           <thead>
             <tr>
               <th>Player</th>

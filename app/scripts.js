@@ -295,6 +295,7 @@ $('#open-options').click(() => {
   isOptionsOpen = true;
 });
 $('#open-leaderboard').click(() => {
+  if (leaderboard === null) getScores();
   $('#leaderboard').show();
   isLeaderboardOpen = true;
 });
@@ -398,19 +399,25 @@ if (prefersDark) {
 function setLeaderboard(data) {
   leaderboard = data;
   $('#leaderboard-body').empty();
-  leaderboard.map((leader, index) => {
+  leaderboard.map((leader) => {
     $(`<tr><td class="user-name text-left">${leader.name}</td><td>${leader.score}</tr>`).appendTo('#leaderboard-body');
   });
+  $('#leaderboard-loading').addClass('display-none');
+  $('#leaderboard-table').removeClass('display-none');
 }
 
 // fetch scores on intial page load
 async function getScores() {
+  $('#leaderboard-loading').removeClass('display-none');
+  $('#leaderboard-table').addClass('display-none');
   try {
     const response = await fetch('https://simon-api.herokuapp.com/api');
     const data = await response.json();
     setLeaderboard(data);
   } catch (error) {
     console.error(error.message);
+    leaderboard = null;
+    $('#leaderboard-loading').text(`Could not load data. Please try again soon.`);
   }
 }
 
@@ -463,6 +470,8 @@ function validateName() {
 }
 
 async function submitHighScore() {
+  $('#submit-high-score').removeClass('is-primary').addClass('is-disabled');
+
   const data = {
     name: $('#name').val(),
     score: Number($('#success-level').text()),
@@ -482,6 +491,8 @@ async function submitHighScore() {
     isLeaderboardOpen = true;
   } catch (error) {
     console.error('Error submitting score:', error.message);
+  } finally {
+    $('#submit-high-score').removeClass('is-disabled').addClass('is-primary');
   }
 }
 
