@@ -70,7 +70,7 @@ function checkAnswer(currentLevel) {
     playSound('wrong');
     togglePointers();
     $('h1').text('Game Over');
-    if (smlDevice.matches) {
+    if (mobileDevice.matches) {
       $('#subtitle').text('Tap Anywhere to Restart');
     } else {
       $('#subtitle').text('Press Spacebar to Restart');
@@ -252,7 +252,7 @@ function calculateHighScore() {
   } else {
     highScore = highScore;
   }
-  $('#subtitle').text(`Highest level: ${highScore}`);
+  $('#subtitle').text(`Best: ${highScore}`);
 }
 
 // MISC AESTHETICS
@@ -360,8 +360,8 @@ function toggleDarkModeRadio() {
 
 // MEDIA-QUERIES
 
-function deviceWidth() {
-  if (smlDevice.matches) {
+function respondToDeviceWidth() {
+  if (mobileDevice.matches || $(window).width() < 800) {
     $('#subtitle').text('Tap Anywhere to Start');
     $('.keyboards-only').hide();
     $('.hotkey').addClass('hotkey-gone');
@@ -374,14 +374,16 @@ function deviceWidth() {
     $('.hotkey').removeClass('hotkey-gone');
   }
 }
-const smlDevice = window.matchMedia('(max-width: 800px)');
-smlDevice.addEventListener('change', deviceWidth);
+
+const mobileDevice = window.matchMedia('(max-width: 800px)');
+console.log(mobileDevice.matches);
+mobileDevice.addEventListener('change', respondToDeviceWidth);
 
 // on mobile size screens: start game on touch anywhere except the buttons and their dialogs
 function addTouchToStart() {
   $(document).click((event) => {
     const target = $(event.target);
-    if (!target.closest('.dont-start').length && !started && smlDevice.matches) {
+    if (!target.closest('.dont-start').length && !started && !isAddHighScoreOpen && mobileDevice.matches) {
       startGame();
     }
   });
@@ -533,4 +535,5 @@ function pretendToLoad() {
 $(document).ready(() => {
   pretendToLoad();
   getScores();
+  respondToDeviceWidth();
 });

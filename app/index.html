@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Simon</title>
+    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
     <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
@@ -27,7 +28,7 @@
       <h2 id="subtitle">Press Spacebar to Start</h2>
     </header>
 
-    <section class="btns-container">
+    <main class="btns-container">
       <div class="row">
         <div type="button" id="green" class="nes-container is-rounded game-btn green"></div>
         <div type="button" id="red" class="nes-container is-rounded game-btn red"></div>
@@ -36,7 +37,7 @@
         <div type="button" id="yellow" class="nes-container is-rounded game-btn yellow"></div>
         <div type="button" id="blue" class="nes-container is-rounded game-btn blue"></div>
       </div>
-    </section>
+    </main>
 
     <footer>
       <h2 class="controls">
@@ -68,7 +69,7 @@
     </footer>
 
     <section id="how-to-play" class="dialog-bg dont-start">
-      <article class="dialog-content how-to-play">
+      <article class="dialog-content dialog-min-width how-to-play">
         <p class="font-bold">How to Play</p>
         <p>
           Simon randomly flashes a color one at a time. Your job is to remember the sequence and click on them to prove it.
@@ -81,7 +82,7 @@
     </section>
 
     <section id="options" class="dialog-bg dont-start">
-      <div class="dialog-content options">
+      <div class="dialog-content dialog-min-width options">
         <p class="font-bold">Options</p>
         <div class="flex-justify-center">
           <table class="align-self-center text-left">
@@ -130,7 +131,7 @@
     </section>
 
     <section id="about" class="dialog-bg dont-start">
-      <article class="dialog-content about">
+      <article class="dialog-content dialog-min-width about">
         <p class="font-bold">About</p>
         <p>Made as an extension to a <a href="https://www.appbrewery.co/" target="_blank" class="hotkey">TAB project</a></p>
         <p>
@@ -140,7 +141,7 @@
           ><i class="nes-icon github is-large"></i>
           <p>benmneb</p>
         </a>
-        <menu class="dialog-menu padding-left-0 margin-btm-0">
+        <menu class="dialog-menu about-menu padding-left-0 margin-btm-0">
           <button id="close-about" class="nes-btn hotkey">Close</button>
           <a class="nes-btn is-primary hotkey" href="https://github.com/benmneb/simon" target="_blank">View on GitHub</a>
         </menu>
@@ -148,7 +149,7 @@
     </section>
 
     <section id="leaderboard" class="dialog-bg dont-start">
-      <article class="dialog-content leaderboard">
+      <article class="dialog-content dialog-min-width leaderboard">
         <p class="font-bold flex-aligned-center flex-space-around">
           <i class="nes-icon trophy is-medium"></i><span>Leaderboard</span><i class="nes-icon trophy is-medium"></i>
         </p>
@@ -171,7 +172,7 @@
     </section>
 
     <section id="add-high-score" class="dialog-bg">
-      <article class="dialog-content add-high-score">
+      <article class="dialog-content dialog-min-width add-high-score">
         <p class="font-bold flex-aligned-center flex-space-around">
           <i class="nes-icon star is-medium"></i>Congratulations!<i class="nes-icon star is-medium"></i>
         </p>
@@ -204,14 +205,14 @@
       </article>
     </section>
 
-    <section id="sound-notification" class="pop-over">
+    <aside id="sound-notification" class="pop-over">
       <div class="padding-btm-0">
         <i class="nes-bcrikko"></i>
         <div class="nes-balloon from-left pop-over-msg">
           <p id="sound-notification-text">Sounds off.</p>
         </div>
       </div>
-    </section>
+    </aside>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="scripts.js" charset="utf-8"></script>

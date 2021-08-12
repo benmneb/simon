@@ -23,7 +23,6 @@ body {
   text-align: center;
   background-color: var(--body-bg);
   color: var(--text-color);
-  overflow: hidden;
   /* disable text highlighting */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -46,8 +45,13 @@ h1 {
 
 .btns-container {
   display: block;
-  width: 500px;
+  max-width: 500px;
   margin: auto;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
 }
 
 .game-btn {
@@ -92,7 +96,7 @@ h1 {
 .loading-container {
   margin: 0 auto;
   width: 50%;
-  min-width: 470px;
+  min-width: 270px;
   /* vertically center */
   position: relative;
   top: 50%;
@@ -132,24 +136,36 @@ h1 {
   border-image-outset: 2;
 }
 
+.dialog-min-width {
+  min-width: var(--dialog-min-width);
+}
+
+@media (max-width: 470px) {
+  .dialog-min-width {
+    min-width: 100vw;
+  }
+
+  .about-menu {
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+}
+
 .how-to-play {
   width: 45%;
-  min-width: var(--dialog-min-width);
 }
 
 .options {
   width: 30%;
-  min-width: var(--dialog-min-width);
 }
 
 .about {
   width: 45%;
-  min-width: var(--dialog-min-width);
 }
 
 .leaderboard {
   width: 20%;
-  min-width: var(--dialog-min-width);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -182,7 +198,6 @@ h1 {
 
 .add-high-score {
   width: 20%;
-  min-width: var(--dialog-min-width);
   display: flex;
   flex-direction: column;
   align-items: center;
