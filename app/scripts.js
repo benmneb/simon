@@ -13,7 +13,7 @@ let started = false;
 
 let muteEverything = false;
 
-let highScore = 0;
+let highScore = localStorage.getItem('highScore') || 0;
 
 let darkMode = false;
 
@@ -249,8 +249,10 @@ $(document).on('keydown', (e) => {
 function calculateHighScore() {
   if (highScore <= level) {
     highScore = level;
+    localStorage.setItem('highScore', level);
   } else {
     highScore = highScore;
+    localStorage.setItem('highScore', highScore);
   }
   $('#subtitle').text(`Best: ${highScore}`);
 }
